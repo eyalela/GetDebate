@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+    #nav{
+                flex-direction: column;
+               
+            }
+            ul{
+                flex-direction: row;
+            }
+            li{
+                display: inline;
+                margin: 20px;
+                color:rgb(49, 49, 49)
+                
+            }
+    
+    #myInput {
+      background-image: url('/css/searchicon.png');
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+      width: 100%;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+    
+    #myTable {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ddd;
+      font-size: 18px;
+    }
+    
+    #myTable th, #myTable td {
+      text-align: left;
+      padding: 12px;
+    }
+    
+    #myTable tr {
+      border-bottom: 1px solid #ddd;
+    }
+    
+    #myTable tr.header, #myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+    </style>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="About.html">About</a></li>
+                </ul>
+        </nav>
+    <h2>My Attorneys</h2>
+    
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search .." title="Type in a name">
+    
+    <table id="myTable">
+      <tr class="header">
+        <th style="width:25%;">Name</th>
+        <th style="width:35%;">Speciality</th>
+        <th style="width:15%;">Location-City</th>
+        <th style="width:15%;">Num of cases</th>
+        
+      </tr>
+      <tr>
+        <td>Alfreds Futterkiste</td>
+        <td>Criminal Law</td>
+        <td>Tel aviv</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Berglunds snabbkop</td>
+        <td>Administrative Law</td>
+        <td>Haifa</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Island Trading</td>
+        <td>International Law</td>
+        <td>BeerSheva</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Koniglich Essen</td>
+        <td>Labor and Employment Law</td>
+        <td>Herzelia</td>
+        <td>12</td>
+      </tr>
+      <tr>
+        <td>Laughing Bacchus Winecellars</td>
+        <td>Criminal Law</td>
+        <td>Rehovot</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>Magazzini Alimentari Riuniti</td>
+        <td>Business and commercial law</td>
+        <td>Petach Tikva</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>Eli Eliahu</td>
+        <td>Administrative Law</td>
+        <td>Yafo</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Paris specialites</td>
+        <td>Criminal Law</td>
+        <td>Herzelia</td>
+        <td>2</td>
+      </tr>
+    </table>
+    
+    <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+     for (i = 1; i < tr.length; i++) {
+    // Hide the row initially.
+    tr[i].style.display = "none";
+
+    td = tr[i].getElementsByTagName("td");
+    for (var j = 0; j < td.length; j++) {
+      cell = tr[i].getElementsByTagName("td")[j];
+      if (cell) {
+        if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          break;
+        } 
+      }
+    }
+}
+     
+    }
+    </script>
+    
+    </body>
+    </html>  
+</body>
+</html>
