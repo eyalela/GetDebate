@@ -5,20 +5,20 @@
         <title>my page!</title>
         <style>
             body{
-                background-color: rgb(69, 140, 221);
-                font-family: Arial, Helvetica, sans-serif;
+                
+                font-family: calibri, Helvetica, sans-serif;
                 font-size:xx-large;
-                background-image: url(poster-banner-home-opt.jpg);
+                background-image: url(Background-website-01.jpg);
                 background-size: 320mm 180mm;
                 
                 
                 
             }
             body:after {
+                
             content: "";
             position: fixed;
             top: 0; bottom: 0; left: 0; right: 0; 
-             background: rgba(15, 15, 15, 0.25);
               pointer-events: none;
             }
             nav{
@@ -31,19 +31,19 @@
             li{
                 display: inline;
                 margin: 20px;
-                color:rgb(49, 49, 49)
+                color:rgb(12, 11, 11)
                 
             }
             h1{
                 
-                color:rgb(38, 0, 253); 
+                color:rgb(1, 0, 3); 
                 font-style: oblique;
                 font-weight: bold;
                 
                                                               
             }
             p{
-                color:rgb(34, 32, 175);
+                color:rgb(1, 0, 3);
                 font-optical-sizing:initial;
                 font-weight: bold;
             }
@@ -51,36 +51,125 @@
                 
             
             h3{
-                color:rgb(62, 39, 180);
+                color:rgb(12, 11, 11);
                 font-style: italic;
                 font-weight: bold;
                 
-                
             }
-            
+
+        /* The navigation menu */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Navigation links */
+.navbar a {
+  float: right;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The subnavigation menu */
+.subnav {
+  float: right;
+  overflow: hidden;
+}
+
+/* Subnav button */
+.subnav .subnavbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+/* Add a red background color to navigation links on hover */
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color:rgb(128, 240, 161);
+}
+
+/* Style the subnav content - positioned absolute */
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color:rgba(93, 155, 103, 0.795);
+  width: 100%;
+  z-index: 1;
+}
+
+/* Style the subnav links */
+.subnav-content a {
+  float: right;
+  color: white;
+  text-decoration: none;
+}
+
+/* Add a grey background color on hover */
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+
+/* When you move the mouse over the subnav container, open the subnav content */
+.subnav:hover .subnav-content {
+  display: block;
+}
+
         </style>
+
     <body>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html">Login</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="About.html">About</a></li>
-                </ul>
-        </nav>
+        
+
+        <div class="navbar">
+
+            <a href="index.html">מסך הבית</a>
+            
+
+            <div class="subnav">
+              <button class="subnavbtn">כניסה<i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
+              <a href = "Login.html"> </a>
+               
+              </div>
+            </div>
+
+            <div class="subnav">
+              <button class="subnavbtn" > קצת עלינו <i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
+                <a href="About.html">our story</a> 
+              </div>
+            </div>
+            
+            <a href="contact.html">צור קשר</a>
+
+          </div>
+
+
         <h1>                    
             <h1 align="Center">GetDebate</h1>
         </h1>
         
-        <h3 align="Center"> Data for better decisions </h3>
+        <h3 align="Center"> Data for better decisions</h3>
         
-              <p align = "Center"> Press Here to start  </p> 
-             
-              <div align="Center"><a href="Attorneys.html"><input type="button" value="Go to your workspace" /></a>
-        
-                </div>                               
+              <p align = "Center">לחץ כאן והתחל בשימוש  </p> 
+              
+              <div align="Center">
+                  <a href="Attorneys.html">
+                      <input type="button" value="עבור לסביבת העבודה שלך ">
+                    </a>
+               
+                
+                
 
-            
         </menu>       
     </body>     
 </html>
