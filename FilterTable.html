@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilterTable</title>
+    <link rel = "stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    
+</head>
+<body>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                 <th>משרד</th>
+                <th>מס תיקים</th>
+                <th>התמחות</th>
+                <th>שם</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            
+                
+               
+                <td>תל אביב</td>
+                <td>47</td>
+                <td>פלילי</td>
+                <td>משה משה</td>
+                
+            </tr>
+            <tr>
+                
+               
+                <td>חיפה</td>
+                <td>21</td>
+                <td>דיני עבודה</td>
+                <td>ישראל ישראלי</td>
+               
+            </tr>
+            <tr>
+               
+                
+                <td>ירושלים</td>
+                <td>30</td>
+                <td>דיני משפחה</td>
+                <td>חיים חיים</td>
+                
+            </tr>
+            <tr>
+               
+               
+                <td>באר שבע</td>
+                <td>51</td>
+                <td>פלילי</td>
+                <td>שמעון שמעון</td>
+                
+            </tr>
+            <tr>
+                
+                
+                <td>נתניה</td>
+                <td>29</td>
+                <td>דיני עבודה</td>
+                <td>יצחק יצחקי</td>
+              
+            </tr>
+            <tr>
+               
+              
+                <td>תל אביב</td>
+                <td>27</td>
+                <td>דיני משפחה</td>
+                <td>דינה מדינה</td>
+               
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                
+            </tr>
+        </tfoot>
+    </table>
+    <script>
+        $(document).ready(function() {
+    $('#example').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
+    </script>
+</body>
+</html>
