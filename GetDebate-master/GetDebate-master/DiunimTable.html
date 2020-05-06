@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <style>
+    table {
+      width: 100%;
+      font: 17px Calibri;
+    }
+
+    table,
+    th,
+    td {
+      border: solid 1px #DDD;
+      border-collapse: collapse;
+      padding: 2px 3px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body style="direction:rtl;"></body>
+  <h1>דיונים</h1>
+  <form style="display: flex; width: 100%;">
+    <input type="text" id="praklit" name="fname" placeholder="פרקליט"><br>
+    <input type="text" id="judge" name="lname" placeholder="שופט"><br><br>
+    <input type="text" id="court" name="fname" placeholder="בית משפט"><br>
+    <input type="text" id="debate" name="lname" placeholder="סוג דיון"><br><br>
+    <input type="text" id="numOf" name="fname" placeholder="מספר חוצצים"><br>
+    <input type="text" id="expectedTime" placeholder="זמן צפוי"><br><br>
+    <input type="text" id="date" placeholder="מועד"><br>
+    <input type="submit" onclick="jsAdd()" value="הוסף">
+  </form>
+  <div id="showData"></div>
+
+  <script src="js/r.js" type="text/javascript"></script>
+  <script>
+
+    // get the debates from the json file as a string
+    function getDiunim() {
+      var diunimString = localStorage.getItem("Diunim");
+      return JSON.parse(diunimString);
+    }
+    // set the debates to the json file
+
+    function setDiunim(diunim) {
+      var diunimString = JSON.stringify(diunim);
+      localStorage.setItem("Diunim", diunimString);
+    }
+    //load json into table
+    var requestfile = 'Diunim.json';
+    var req = new XMLHttpRequest();
+    req.open('GET', requestfile);
+    req.responseType = 'json';
+    req.send();
+    req.onload = function () {
+      setDiunim(req.response);
+      makeTable();
+    }
+    function jsAdd() {
+      var Diunim = getDiunim();
+      /*       var prak = document.getElementById("praklit").val;
+            var judg = document.getElementById("judge").val;
+            var cour = document.getElementById("court").val;
+            var deba = document.getElementById("debate").val;
+            var num = document.getElementById("numOf").val;
+            var excp = document.getElementById("expectedTime").val;
+            var date = document.getElementById("date").val; */
+      Diunim.push({
+        'פרקליט': 'בדיקה', 'שופט': 'בדיקה', 'בית משפט': 'בדיקה', 'סוג דיון': 0, 'מספר חוצצים': 0,
+        'זמן צפוי': 0, 'מועד': 0
+      });
+      setDiunim(Diunim);
+      makeTable();
+      console.log(Diunim);
+    }
+    //fill the table with the data from the json file
+    function makeTable() {
+
+      var jsonObj = getDiunim();
+      var keys = Object.keys(jsonObj[0]); // headlines
+      var table = document.createElement("table");
+      var tfoot = document.createElement("tfoot");
+      var thead = document.createElement("thead");
+      var tbody = document.createElement("tbody");
+
+      table.id = "tableid";
+      table.className = "display";
+
+      var tr = table.insertRow(-1);
+      //Table head - headlines
+      for (var i = keys.length - 1; i >= 0; i--) {
+        var th = document.createElement("th");
+        th.innerHTML = keys[i];
+        tr.appendChild(th);
+      }
+      //Table body - rows\content
+      for (var j = jsonObj.length - 1; j >= 0; j--) {
+        var tr1 = table.insertRow(-1);
+        for (var i = keys.length - 1; i >= 0; i--) {
+          var tCell = tr1.insertCell(-1);
+          tCell.innerHTML = jsonObj[j][keys[i]];
+        }
+        thead.appendChild(tr);
+      }
+      table.appendChild(thead);
+      //Table foot - sort options
+      var tr2 = document.createElement("tr");
+      for (var p = 0; p < keys.length; p++) {
+        var th = document.createElement("th");
+        th.innerHTML = keys[p];
+        tr2.appendChild(th);
+      }
+      tfoot.appendChild(tr2);
+      table.appendChild(tfoot);
+      var divContainer = document.getElementById("showData");
+      divContainer.innerHTML = "";
+      divContainer.appendChild(table);
+    };
+    //create table with sort and filter options. 
+    $(document).ready(function () {
+      $('#tableid').DataTable({
+        initComplete: function () {
+          this.api().columns().every(function () {
+            var column = this;
+            var select = $('<select><option value=""></option></select>')
+              .appendTo($(column.footer()).empty())
+              .on('change', function () {
+                var val = $.fn.dataTable.util.escapeRegex(
+                  $(this).val()
+                );
+
+                column
+                  .search(val ? '^' + val + '$' : '', true, false)
+                  .draw();
+              });
+
+            column.data().unique().sort().each(function (d, j) {
+              select.append('<option value="' + d + '">' + d + '</option>')
+            });
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
